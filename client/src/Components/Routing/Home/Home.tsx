@@ -30,7 +30,7 @@ function Home() {
     try {
       const response = await axios.request<IUserResponse>({
         method: "GET",
-        url: "/api/users",
+        url: "/api/bookshelf",
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
