@@ -2,41 +2,41 @@ import { useState, useContext, useEffect, useCallback } from "react";
 import { AccessTokenContext } from "../../../Contexts/AccessTokenContext";
 import axios from "axios";
 
-interface IUser {
-  id: number;
-  firstName: string;
-  lastName: string;
-  avatar: string;
+interface IBook {
+  id: string;
+  title: string;
+  poster: string;
+  synopsis: string;
   [key: string]: any;
 }
 
-interface IUserResponse {
+interface IBookResponse {
   page: number;
   perPage: number;
   total: number;
   totalPages: number;
-  data: IUser[];
+  data: IBook[];
 }
 
 function Home() {
-  const [users, setUsers] = useState<IUser[]>([]);
+  const [books, setBooks] = useState<IBook[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   /**
    * Getting access token from the Context API
    */
   const { getToken, logout } = useContext(AccessTokenContext);
 
-  const getUsers = useCallback(async () => {
+  const getBooks = useCallback(async () => {
     try {
-      const response = await axios.request<IUserResponse>({
+      const response = await axios.request<IBookResponse>({
         method: "GET",
         url: "/api/bookshelf",
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       });
-      const users = response.data.data;
-      setUsers(users);
+      const books = response.data.data;
+      setBooks(books);
     } catch (error) {
       console.error(error);
       /**
@@ -49,8 +49,8 @@ function Home() {
   }, [getToken]);
 
   useEffect(() => {
-    getUsers();
-  }, [getUsers]);
+    getBooks();
+  }, [getBooks]);
 
   return (
     <div className="container mt-2 mb-5">
@@ -64,12 +64,12 @@ function Home() {
           Logout
         </button>
       </div>
-      {users.map((user) => {
-        const key = `user-${user.id}`;
-        const name = `${user.firstName} ${user.lastName}`;
+      {books.map((book) => {
+        const key = `book-${book.id}`;
+        const name = `${book.title}`;
         return (
           <div key={key}>
-            <img src={user.avatar} alt={name} />
+            <img src={book.poster} alt={name} />
             <p>{name}</p>
           </div>
         );

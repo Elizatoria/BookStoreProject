@@ -34,8 +34,8 @@ function Login() {
           "Content-Type": "application/json",
         },
         data: {
-          username,
-          password,
+          username: username,
+          password: password,
         },
       });
       /**
@@ -97,8 +97,8 @@ function Login() {
       </form>
       <p className="form-text">
         <small>
-          The username is <em>username</em> and the password is{" "}
-          <em>password</em>
+          The username is <em>hermione</em> and the password is{" "}
+          <em>granger</em>
         </small>
       </p>
       {isLoading && <p>Loading ...</p>}
