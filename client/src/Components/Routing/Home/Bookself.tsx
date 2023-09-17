@@ -5,20 +5,19 @@ import axios from "axios";
 interface IBook {
   id: string;
   title: string;
-  poster: string;
+  image: string;
   synopsis: string;
   [key: string]: any;
 }
 
 interface IBookResponse {
-  page: number;
-  perPage: number;
-  total: number;
-  totalPages: number;
+  wantToRead: [],
+  currentlyReading: [],
+  read: [],
   data: IBook[];
 }
 
-function Home() {
+function Bookself() {
   const [books, setBooks] = useState<IBook[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   /**
@@ -69,7 +68,7 @@ function Home() {
         const name = `${book.title}`;
         return (
           <div key={key}>
-            <img src={book.poster} alt={name} />
+            <img src={book.image} alt={name} />
             <p>{name}</p>
           </div>
         );
@@ -83,4 +82,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Bookself;

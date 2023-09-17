@@ -9,6 +9,7 @@ function Login() {
    */
   const { login } = useContext(AccessTokenContext);
   const navigate = useNavigate();
+  console.log(login);
 
   /**
    * User input
@@ -34,8 +35,8 @@ function Login() {
           "Content-Type": "application/json",
         },
         data: {
-          username: username,
-          password: password,
+          username,
+          password,
         },
       });
       /**
@@ -56,7 +57,7 @@ function Login() {
        */
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         setErrorMessage("Invalid username or password");
-      } else setErrorMessage("We are sorry, unexpected error occurred.");
+      } else setErrorMessage("We are sorry. Unexpected error occurred.");
       setIsLoading(false);
     }
   };
