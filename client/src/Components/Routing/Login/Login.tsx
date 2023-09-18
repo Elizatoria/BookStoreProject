@@ -1,4 +1,4 @@
-import { useContext, useState, FormEvent } from "react";
+import { useContext, useState, FormEvent, ChangeEvent } from "react";
 import { AccessTokenContext } from "../../../Contexts/AccessTokenContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -76,7 +76,9 @@ function Login() {
             className="form-control mr-3"
             required={true}
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setUsername(e.target.value)
+            }
           />
         </div>
         <div className="form-group">
@@ -89,7 +91,9 @@ function Login() {
             className="form-control mr-3"
             required={true}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
           />
         </div>
         <button type="submit" className="btn btn-primary" disabled={isLoading}>
