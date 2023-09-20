@@ -9,7 +9,6 @@ function Login() {
    */
   const { login } = useContext(AccessTokenContext);
   const navigate = useNavigate();
-  console.log(login);
 
   /**
    * User input
@@ -30,7 +29,7 @@ function Login() {
     try {
       const response = await axios.request({
         method: "POST",
-        url: "/api/login",
+        url: "/api/signin",
         headers: {
           "Content-Type": "application/json",
         },
@@ -49,7 +48,7 @@ function Login() {
       /**
        * And redirecting to the home page
        */
-      navigate("/home", { replace: true });
+      navigate("/bookshelf", { replace: true });
     } catch (error) {
       console.error(error);
       /**

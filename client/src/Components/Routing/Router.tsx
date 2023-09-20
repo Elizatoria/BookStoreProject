@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 import Login from "./Login/Login";
-import Bookself from "./Home/Bookself";
+import Bookshelf from "./Home/Bookshelf";
 import FileNotFound from "./FileNotFound/FileNotFound";
 
 function Router() {
@@ -10,10 +10,10 @@ function Router() {
     <Routes>
       {/* The ProtectedRoute will redirect the user to the login form if they haven't logged in. */}
       <Route
-        path="/bookself"
+        path="/bookshelf"
         element={
           <ProtectedRoute>
-            <Bookself />
+            <Bookshelf />
           </ProtectedRoute>
         }
       />

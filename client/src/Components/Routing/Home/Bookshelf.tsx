@@ -11,18 +11,22 @@ interface IBook {
 }
 
 interface IBookResponse {
-  wantToRead: [],
-  currentlyReading: [],
-  read: [],
-  data: IBook[];
+  books: {
+    wantToRead: IBook[],
+    currentlyReading: IBook[],
+    read: IBook[]
+  }
 }
 
-function Bookself() {
-  const [books, setBooks] = useState<IBook[]>([]);
+function Bookshelf() {
+
+  const [ wantRead, setWantRead] = useState<IBook[]>([]);
+  const [ currently, setCurrently] = useState<IBook[]>([]);
+  const [ read, setRead] = useState<IBook[]>([]);
+
   const [errorMessage, setErrorMessage] = useState("");
-  /**
-   * Getting access token from the Context API
-   */
+
+  //Getting access token from the Context API
   const { getToken, logout } = useContext(AccessTokenContext);
 
   const getBooks = useCallback(async () => {
@@ -34,8 +38,10 @@ function Bookself() {
           Authorization: `Bearer ${getToken()}`,
         },
       });
-      const books = response.data.data;
-      setBooks(books);
+      const books = response.data.books;
+      setWantRead(books.wantToRead);
+      setCurrently(books.currentlyReading);
+      setRead(books.read);
     } catch (error) {
       console.error(error);
       /**
@@ -63,7 +69,8 @@ function Bookself() {
           Logout
         </button>
       </div>
-      {books.map((book) => {
+      <h2>Want To Read</h2>
+      {wantRead.map((book) => {
         const key = `book-${book.id}`;
         const name = `${book.title}`;
         return (
@@ -73,6 +80,31 @@ function Bookself() {
           </div>
         );
       })}
+
+      <h2>Currently Reading</h2>
+      {currently.map((book) => {
+        const key = `book-${book.id}`;
+        const name = `${book.title}`;
+        return (
+          <div key={key}>
+            <img src={book.image} alt={name} />
+            <p>{name}</p>
+          </div>
+        );
+      })}
+
+      <h2>Read</h2>
+      {read.map((book) => {
+        const key = `book-${book.id}`;
+        const name = `${book.title}`;
+        return (
+          <div key={key}>
+            <img src={book.image} alt={name} />
+            <p>{name}</p>
+          </div>
+        );
+      })}
+
       {errorMessage && (
         <div className="alert alert-danger" role="alert">
           {errorMessage}
@@ -82,4 +114,4 @@ function Bookself() {
   );
 }
 
-export default Bookself;
+export default Bookshelf;
