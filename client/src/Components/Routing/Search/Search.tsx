@@ -7,65 +7,72 @@ interface BookType {
 }
 
 const Search = () => {
-  const [search, setSearch]=useState<BookType>();
-  const [bookData, setBookData]=useState<BookType>();
+    const [APIData, setAPIData] = useState<BookType[]>([]);
+    const [filteredResults, setFilteredResults] = useState<BookType[]>([]);
+    const [searchInput, setSearchInput] = useState('');
 
-  useEffect(() => {
-    axios.get('/api/book/search/bookTitle'+search+'&key=AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU'+'&maxResults=40')
-    .then(res=>setBookData(res.data.items))
-    .catch(err=>console.log(err))
-  }, [])
+    useEffect(() => {
+        axios.get('/api/book/search/bookTitle'+APIData+'&key=AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU'+'&maxResults=40')
+            .then((response) => {
+                setAPIData(response.data);
+                console.log(response.data);
+            })
+    }, [APIData])
 
-  const handleOnClick = () => {
-    const findBooks =
-      search && search?.length > 0
-        ? search?.filter((book) => book?.name === bookData)
-        : undefined;
+    const searchItems = (searchValue: string) => {
+        setSearchInput(searchValue);
+        if (searchInput !== '') {
+            const filteredData = APIData.filter((item) => {
+                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+            })
+            setFilteredResults(filteredData)
+        }
+        else{
+            setFilteredResults(APIData)
+        }
+    }
 
-    console.log(findBooks);
-
-    setSearch(findBooks);
-  };
-
-  return (
-    <div>
-      <div className="title">
-        <h1>A room without books is like a body without a soul. – Marcus Tullius Cicero</h1>
-        <h2>Find Your Book</h2>
-      </div>
-      <div className="input__wrapper">
-        <input
-          type="text"
-          placeholder="Enter Your Book Name"
-          value={search}
-          onChange={(e) => {
-            setBookData(e.target.value);
-            setSearch(book.title);
-          }}
-        />
-        <button disabled={!search} onClick={handleOnClick}>
-          Search
-        </button>
-      </div>
-
-      <div className="body">
-        {search && search?.length === 0 && (
-          <div className="notFound">No User Found</div>
-        )}
-
-        {search &&
-          search?.length > 0 &&
-          search?.map((book) => {
-            return (
-              <div className="body__item">
-                <h3>Title: {book?.title}</h3>
-                <p>Authors: {book?.authors}</p>
-              </div>
-            );
-          })}
-      </div>
-    </div>
-  );
-};
+return (
+ <div style={{ padding: 20 }}>
+            <input
+            type="text"
+            placeholder="Enter Your Book Name"
+            onChange={(e) => searchItems(e.target.value)}
+            />
+            <button disabled={!filteredResults} onClick={searchItems}>
+//           Search
+//         </button>
+            <div style={{ marginTop: 20 }}>
+                {searchInput.length > 1 ? (
+                    filteredResults.map((item) => {
+                        return (
+                            <div className='Card'>
+                                <div className='Content'>
+                                    <h2>{item.title}</h2>
+                                    <h3>
+                                        {item.authors}
+                                    </h3>
+                                </div>
+                            </div>
+                        )
+                    })
+                ) : (
+                    APIData.map((item) => {
+                        return (
+                            <div className='Card'>
+                                <div className='Content'>
+                                    <h2>{item.title}</h2>
+                                    <h3>
+                                        {item.authors}
+                                    </h3>
+                                </div>
+                            </div>
+                        )
+                    })
+                )}
+            </div>
+        </div>
+    )
+}
 
 export default Search;
