@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import axios from "axios";
 
 interface BookType {
@@ -32,46 +32,34 @@ const Search = () => {
         }
     }
 
+    const handleSubmit = (e: FormEvent ) => {
+        e.preventDefault();
+      };
+
 return (
- <div style={{ padding: 20 }}>
+    <form className="container mt-4" method="POST" onSubmit={handleSubmit}>
             <input
             type="text"
             placeholder="Enter Your Book Name"
+            value={searchInput || ""}
             onChange={(e) => searchItems(e.target.value)}
             />
-            <button disabled={!filteredResults} onClick={searchItems}>
-//           Search
-//         </button>
-            <div style={{ marginTop: 20 }}>
-                {searchInput.length > 1 ? (
-                    filteredResults.map((item) => {
-                        return (
-                            <div className='Card'>
-                                <div className='Content'>
-                                    <h2>{item.title}</h2>
-                                    <h3>
-                                        {item.authors}
-                                    </h3>
-                                </div>
-                            </div>
-                        )
-                    })
-                ) : (
-                    APIData.map((item) => {
-                        return (
-                            <div className='Card'>
-                                <div className='Content'>
-                                    <h2>{item.title}</h2>
-                                    <h3>
-                                        {item.authors}
-                                    </h3>
-                                </div>
-                            </div>
-                        )
-                    })
-                )}
-            </div>
+      <button type="submit" className="btn btn-primary">
+        Submit
+      </button>
+
+      {filteredResults && (
+        <div className="card card-body bg-light mt-4 mb-4">
+          Results:
+          <ul className="list-unstyled mb-0">
+            {Object.values(filteredResults).map((value, index) => {
+              return <li key={`value-${index}`}>{value.title}</li>;
+            })}
+          </ul>
+
         </div>
+      )}
+    </form>
     )
 }
 
