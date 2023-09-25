@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect} from 'react';
 import axios from "axios";
 
 interface BookType {
@@ -7,60 +7,67 @@ interface BookType {
 }
 
 const Search = () => {
-    const [APIData, setAPIData] = useState<BookType[]>([]);
-    const [filteredResults, setFilteredResults] = useState<BookType[]>([]);
+    //const [APIData, setAPIData] = useState<BookType[]>([]);
+    const [filteredResults, setFilteredResults] = useState<BookType[] | undefined>([]);
     const [searchInput, setSearchInput] = useState('');
 
     useEffect(() => {
-        axios.get('/api/book/search/bookTitle'+APIData+'&key=AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU'+'&maxResults=40')
+        axios.get('/api/book/search/bookTitle'+filteredResults+'&key=AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU&maxResults=40')
             .then((response) => {
-                setAPIData(response.data);
+                setFilteredResults(response.data);
                 console.log(response.data);
             })
-    }, [APIData])
+    }, [filteredResults])
 
-    const searchItems = (searchValue: string) => {
-        setSearchInput(searchValue);
-        if (searchInput !== '') {
-            const filteredData = APIData.filter((item) => {
-                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
-            })
-            setFilteredResults(filteredData)
-        }
-        else{
-            setFilteredResults(APIData)
-        }
-    }
+  const handleOnClick = () => {
+    const findBooks =
+      filteredResults && filteredResults?.length > 0
+        ? filteredResults?.filter((book) => book?.title === searchInput)
+        : undefined;
 
-    const handleSubmit = (e: FormEvent ) => {
-        e.preventDefault();
-      };
+    console.log(findBooks);
 
-return (
-    <form className="container mt-4" method="POST" onSubmit={handleSubmit}>
-            <input
-            type="text"
-            placeholder="Enter Your Book Name"
-            value={searchInput || ""}
-            onChange={(e) => searchItems(e.target.value)}
-            />
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
+    setFilteredResults(findBooks);
+  };
 
-      {filteredResults && (
-        <div className="card card-body bg-light mt-4 mb-4">
-          Results:
-          <ul className="list-unstyled mb-0">
-            {Object.values(filteredResults).map((value, index) => {
-              return <li key={`value-${index}`}>{value.title}</li>;
-            })}
-          </ul>
+  return (
+    <div>
+      <div className="title">
+        <h2>A room without books is like a body without a soul. – Marcus Tullius Cicero</h2>
+        <h3>Book Find</h3>
+      </div>
+      <div className="input__wrapper">
+        <input
+          type="text"
+          placeholder="Search Book"
+          value={searchInput}
+          onChange={(e) => {
+            setSearchInput(e.target.value);
+          }}
+        />
+        <button disabled={!searchInput} onClick={handleOnClick}>
+          Search
+        </button>
+      </div>
 
-        </div>
-      )}
-    </form>
-    )
-}
+      <div className="body">
+        {filteredResults && filteredResults?.length === 0 && (
+          <div className="notFound">No Books Found</div>
+        )}
+
+        {filteredResults &&
+          filteredResults?.length > 0 &&
+          filteredResults?.map((book) => {
+            return (
+              <div className="body__item">
+                <h3>Name: {book?.title}</h3>
+                <p>Authors: {book?.authors}</p>
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
+};
 
 export default Search;

@@ -60,14 +60,14 @@ function Bookshelf() {
   return (
     <div className="container mt-2 mb-5">
       <div className="d-flex justify-content-between">
-        <h1 className="h2">You are logged in!</h1>
-        <button
+      <button
           type="button"
           className="btn btn-primary mb-2"
           onClick={() => logout()}
         >
           Logout
         </button>
+        <h1 className="h2">My Bookshelf</h1>
       </div>
       <h2>Want To Read</h2>
       {wantRead.map((book) => {
