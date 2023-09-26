@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect, useCallback } from "react";
-import { AccessTokenContext } from "../../../Contexts/AccessTokenContext";
+import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
 import axios from "axios";
-import BookselfLabel from "../BookshelfLabel/BookselfLabel";
+import BookshelfLabel from "../BookshelfLabel/BookshelfLabel";
 
 interface IBook {
   id: string;
@@ -75,11 +75,12 @@ function Bookshelf() {
       {wantRead.map((book) => {
         const key = `book-${book.id}`;
         const name = `${book.title}`;
+        const image = `${book.imageLinks.thumbnail}`;
         return (
           <div key={key}>
-            <img src={book.image} alt={name} />
-            <p>{name}</p>
-            <BookselfLabel />
+            <img src={image} alt={name} />
+            <h3>{name}</h3>
+            <BookshelfLabel />
           </div>
         );
       })}
@@ -88,11 +89,12 @@ function Bookshelf() {
       {currently.map((book) => {
         const key = `book-${book.id}`;
         const name = `${book.title}`;
+        const image = `${book.imageLinks.thumbnail}`;
         return (
           <div key={key}>
-            <img src={book.image} alt={name} />
-            <p>{name}</p>
-            <BookselfLabel />
+            <img src={image} alt={name} />
+            <h3>{name}</h3>
+            <BookshelfLabel />
           </div>
         );
       })}
@@ -101,11 +103,12 @@ function Bookshelf() {
       {read.map((book) => {
         const key = `book-${book.id}`;
         const name = `${book.title}`;
+        const image = `${book.imageLinks.thumbnail}`;
         return (
           <div key={key}>
-            <img src={book.image} alt={name} />
-            <p>{name}</p>
-            <BookselfLabel />
+            <img src={image} alt={name} />
+            <h3>{name}</h3>
+            <BookshelfLabel />
           </div>
         );
       })}
