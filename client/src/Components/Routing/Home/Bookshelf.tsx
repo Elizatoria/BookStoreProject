@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect, useCallback } from "react";
 import { AccessTokenContext } from "../../../Contexts/AccessTokenContext";
 import axios from "axios";
+import BookselfLabel from "../BookshelfLabel/BookselfLabel";
 
 interface IBook {
   id: string;
@@ -19,7 +20,7 @@ interface IBookResponse {
 }
 
 function Bookshelf() {
-
+  
   const [ wantRead, setWantRead] = useState<IBook[]>([]);
   const [ currently, setCurrently] = useState<IBook[]>([]);
   const [ read, setRead] = useState<IBook[]>([]);
@@ -69,6 +70,7 @@ function Bookshelf() {
         </button>
         <h1 className="h2">My Bookshelf</h1>
       </div>
+
       <h2>Want To Read</h2>
       {wantRead.map((book) => {
         const key = `book-${book.id}`;
@@ -77,6 +79,7 @@ function Bookshelf() {
           <div key={key}>
             <img src={book.image} alt={name} />
             <p>{name}</p>
+            <BookselfLabel />
           </div>
         );
       })}
@@ -89,6 +92,7 @@ function Bookshelf() {
           <div key={key}>
             <img src={book.image} alt={name} />
             <p>{name}</p>
+            <BookselfLabel />
           </div>
         );
       })}
@@ -101,6 +105,7 @@ function Bookshelf() {
           <div key={key}>
             <img src={book.image} alt={name} />
             <p>{name}</p>
+            <BookselfLabel />
           </div>
         );
       })}
