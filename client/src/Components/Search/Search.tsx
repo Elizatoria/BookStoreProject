@@ -1,9 +1,11 @@
 import { useState, useEffect} from 'react';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface BookType {
-    title: string,
-    authors: string
+  id: string,
+  title: string,
+  authors: string
 }
 
 const Search = () => {
@@ -11,13 +13,15 @@ const Search = () => {
     const [filteredResults, setFilteredResults] = useState<BookType[] | undefined>([]);
     const [searchInput, setSearchInput] = useState('');
 
+    const navigate = useNavigate();
+
     useEffect(() => {
-        axios.get('/api/book/search/bookTitle'+filteredResults+'&key=AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU&maxResults=40')
+        axios.get(`/api/book/search/${searchInput}&key=AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU&maxResults=40`)
             .then((response) => {
                 setFilteredResults(response.data);
                 console.log(response.data);
             })
-    }, [filteredResults])
+    }, [searchInput])
 
   const handleOnClick = () => {
     const findBooks =
@@ -62,6 +66,7 @@ const Search = () => {
               <div className="body__item">
                 <h3>Name: {book?.title}</h3>
                 <p>Authors: {book?.authors}</p>
+                <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
               </div>
             );
           })}

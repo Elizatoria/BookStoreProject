@@ -4,10 +4,12 @@ import axios from 'axios';
 
 interface BookType {
   title: string,
-  imageLinks: string,
+  imageLinks: {
+    thumbnail: string
+  }
   description: string,
   authors: string,
-  genres: string
+  genres: string,
 }
 
 const BookDetails = () => {
@@ -16,18 +18,21 @@ const BookDetails = () => {
   const {id} = useParams();
 
   useEffect(() => {
-    axios.get('/api/book/bookId/')
+    axios.get(`/api/book/${id}`)
     .then((res) => {
       setBook(res.data);
+      console.log(res.data);
     })
     .catch((err) => {console.log(err)})
   }, [id])
+
+  const image = `${book?.imageLinks.thumbnail}`;
 
   return (
     <div>
       <div>
         <h2>{book?.title}</h2>
-        <img src={book?.imageLinks} alt='Book' />
+        <img src={image} alt='Book' />
       </div>
       <div>
         <h2>Description</h2>
@@ -41,4 +46,4 @@ const BookDetails = () => {
   )
 }
 
-export default BookDetails
+export default BookDetails;

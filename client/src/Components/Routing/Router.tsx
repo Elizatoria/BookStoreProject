@@ -7,6 +7,7 @@ import Login from "../Login/Login";
 import Bookshelf from "../Home/Bookshelf";
 
 import Search from "../Search/Search";
+import BookDetails from "../BookDetails/BookDetails";
 
 import FileNotFound from "../FileNotFound/FileNotFound";
 
@@ -34,6 +35,14 @@ function Router() {
       element={
         <ProtectedRoute>
           <Search />
+        </ProtectedRoute>
+      }
+      />
+
+      <Route path="/book/:id"
+      element={
+        <ProtectedRoute>
+          <BookDetails />
         </ProtectedRoute>
       }
       />

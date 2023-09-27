@@ -2,17 +2,18 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface Shelf {
-  shelf: string
+  shelf: string,
+  id: string
 }
 
 const BookshelfLabel = () => {
 
   const [bookLabel, setBookLabel] = useState("");
+  const [id, setId] = useState("");
 
   useEffect(() => {
-    axios.put('/api/bookshelf/bookId/shelfKey')
+    axios.put(`/api/bookshelf/${id}/${bookLabel}`)
         .then((response) => {
-            setBookLabel(response.data);
             console.log(response.data);
         })
 }, [bookLabel])

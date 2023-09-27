@@ -2,6 +2,7 @@ import { useState, useContext, useEffect, useCallback } from "react";
 import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
 import axios from "axios";
 import BookshelfLabel from "../BookshelfLabel/BookshelfLabel";
+import { useNavigate } from "react-router-dom";
 
 interface IBook {
   id: string;
@@ -24,6 +25,8 @@ function Bookshelf() {
   const [ wantRead, setWantRead] = useState<IBook[]>([]);
   const [ currently, setCurrently] = useState<IBook[]>([]);
   const [ read, setRead] = useState<IBook[]>([]);
+
+  const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -78,8 +81,9 @@ function Bookshelf() {
         const image = `${book.imageLinks.thumbnail}`;
         return (
           <div key={key}>
-            <img src={image} alt={name} />
+            <img src={image} alt={name}/>
             <h3>{name}</h3>
+            <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
             <BookshelfLabel />
           </div>
         );
@@ -94,6 +98,7 @@ function Bookshelf() {
           <div key={key}>
             <img src={image} alt={name} />
             <h3>{name}</h3>
+            <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
             <BookshelfLabel />
           </div>
         );
@@ -108,6 +113,7 @@ function Bookshelf() {
           <div key={key}>
             <img src={image} alt={name} />
             <h3>{name}</h3>
+            <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
             <BookshelfLabel />
           </div>
         );
