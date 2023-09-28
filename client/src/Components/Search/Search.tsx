@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { error } from 'console';
@@ -14,28 +14,42 @@ const Search = () => {
     const [filteredResults, setFilteredResults] = useState<BookType[] | undefined>([]);
     const [searchInput, setSearchInput] = useState('');
 
+    console.log(filteredResults);
+
     const navigate = useNavigate();
 
-    useEffect(() => {
-        axios.get(`/api/book/search/${searchInput}&key=AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU&maxResults=40`)
-            .then((response) => {
-                setFilteredResults(response.data);
-                console.log(response.data);
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-    }, [searchInput])
+
+
+    //The HandleOnClick
 
   const handleOnClick = () => {
-    const findBooks =
-      filteredResults && filteredResults?.length > 0
-        ? filteredResults?.filter((book) => book?.title === searchInput)
-        : undefined;
+    
+      axios.get(`/api/book/search/${searchInput}`)
+          .then((response) => {
+            console.log(response);
 
-    console.log(findBooks);
+            // searchInput && searchInput?.length > 0
+            // ? searchInput?.filter((book) => book?.title === searchInput)
+            // : undefined;
 
-    setFilteredResults(findBooks);
+            console.log(searchInput);
+
+              setFilteredResults(response.data.books);
+              console.log(response.data.books);
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+
+          //Put the Filter into then
+    // const findBooks =
+    //   filteredResults && filteredResults?.length > 0
+    //     ? filteredResults?.filter((book) => book?.title === searchInput)
+    //     : undefined;
+
+    // console.log(findBooks);
+
+    // setFilteredResults(findBooks);
   };
 
   return (

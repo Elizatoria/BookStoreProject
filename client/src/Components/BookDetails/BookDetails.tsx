@@ -20,8 +20,8 @@ const BookDetails = () => {
   useEffect(() => {
     axios.get(`/api/book/${id}`)
     .then((res) => {
-      setBook(res.data);
-      console.log(res.data);
+      setBook(res.data.book);
+      console.log(res.data.book);
     })
     .catch((err) => {console.log(err)})
   }, [id])

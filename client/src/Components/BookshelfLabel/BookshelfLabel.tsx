@@ -10,22 +10,24 @@ interface Shelf {
 
 const BookshelfLabel = () => {
 
-  const [bookLabel, setBookLabel] = useState<Shelf>();
+  const [bookLabel, setBookLabel] = useState('');
   const [id, setId] = useState("");
 
-  useEffect(() => {
+  console.log(bookLabel);
+
+  const handleOnChange= (label: string) => {
     axios.put(`/api/bookshelf/${id}/${bookLabel}`)
         .then((response) => {
             console.log(response.data);
         })
-}, [bookLabel])
+}
 
   return (
     <div>
     <label htmlFor="rank">Change Bookshelf:</label>
     <select
       value={bookLabel}
-      onChange={event => setBookLabel(event.target.value)}
+      onChange={event => handleOnChange(event.target.value)}
     >
       <option value=""></option>
       <option value="wantToRead">Want To Read</option>
