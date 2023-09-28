@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface Shelf {
-  shelf: string,
-  id: string
+  book: {
+    id: string,
+    shelf: string
+  }
 }
 
 const BookshelfLabel = () => {
 
-  const [bookLabel, setBookLabel] = useState("");
+  const [bookLabel, setBookLabel] = useState<Shelf>();
   const [id, setId] = useState("");
 
   useEffect(() => {
@@ -29,6 +31,7 @@ const BookshelfLabel = () => {
       <option value="wantToRead">Want To Read</option>
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
+      <option value="none">None</option>
     </select>
     <small>{bookLabel}</small>
   </div>

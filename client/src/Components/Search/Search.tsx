@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { error } from 'console';
 
 interface BookType {
   id: string,
@@ -20,6 +21,9 @@ const Search = () => {
             .then((response) => {
                 setFilteredResults(response.data);
                 console.log(response.data);
+            })
+            .catch((error) => {
+              console.log(error)
             })
     }, [searchInput])
 
