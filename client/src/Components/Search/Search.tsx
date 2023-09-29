@@ -1,7 +1,6 @@
 import { useState} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { error } from 'console';
 
 interface BookType {
   id: string,
@@ -10,7 +9,6 @@ interface BookType {
 }
 
 const Search = () => {
-    //const [APIData, setAPIData] = useState<BookType[]>([]);
     const [filteredResults, setFilteredResults] = useState<BookType[] | undefined>([]);
     const [searchInput, setSearchInput] = useState('');
 
@@ -18,38 +16,16 @@ const Search = () => {
 
     const navigate = useNavigate();
 
-
-
-    //The HandleOnClick
-
   const handleOnClick = () => {
     
       axios.get(`/api/book/search/${searchInput}`)
           .then((response) => {
-            console.log(response);
-
-            // searchInput && searchInput?.length > 0
-            // ? searchInput?.filter((book) => book?.title === searchInput)
-            // : undefined;
-
-            console.log(searchInput);
-
               setFilteredResults(response.data.books);
               console.log(response.data.books);
           })
           .catch((error) => {
             console.log(error)
           })
-
-          //Put the Filter into then
-    // const findBooks =
-    //   filteredResults && filteredResults?.length > 0
-    //     ? filteredResults?.filter((book) => book?.title === searchInput)
-    //     : undefined;
-
-    // console.log(findBooks);
-
-    // setFilteredResults(findBooks);
   };
 
   return (
