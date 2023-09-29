@@ -9,7 +9,7 @@ interface BookType {
   }
   description: string,
   authors: string,
-  genres: string,
+  categories: string,
 }
 
 const BookDetails = () => {
@@ -21,7 +21,6 @@ const BookDetails = () => {
     axios.get(`/api/book/${id}`)
     .then((res) => {
       setBook(res.data.book);
-      console.log(res.data.book);
     })
     .catch((err) => {console.log(err)})
   }, [id])
@@ -39,8 +38,8 @@ const BookDetails = () => {
         <p>{book?.description}</p>
         <h2>Authors</h2>
         <p>{book?.authors}</p>
-        <h2>Genres</h2>
-        <p>{book?.genres}</p>
+        <h2>Categories</h2>
+        <p>{book?.categories}</p>
       </div>
     </div>
   )

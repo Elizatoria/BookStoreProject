@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 interface Shelf {
@@ -11,14 +12,18 @@ interface Shelf {
 const BookshelfLabel = () => {
 
   const [bookLabel, setBookLabel] = useState('');
-  const [id, setId] = useState("");
+  const {id} = useParams();
+  const navigate = useNavigate();
 
   console.log(bookLabel);
+  console.log(id);
 
   const handleOnChange= (label: string) => {
     axios.put(`/api/bookshelf/${id}/${bookLabel}`)
         .then((response) => {
-            console.log(response.data);
+          setBookLabel(response.data.book);
+          navigate(`/bookshelf/${id}/${bookLabel}`)
+            console.log(response.data.book);
         })
 }
 

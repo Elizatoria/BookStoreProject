@@ -9,6 +9,7 @@ interface IBook {
   title: string;
   image: string;
   synopsis: string;
+  shelf: string;
   [key: string]: any;
 }
 
@@ -84,7 +85,7 @@ function Bookshelf() {
             <img src={image} alt={name}/>
             <h3>{name}</h3>
             <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
-            <BookshelfLabel />
+            <BookshelfLabel key={key} />
           </div>
         );
       })}
@@ -99,7 +100,7 @@ function Bookshelf() {
             <img src={image} alt={name} />
             <h3>{name}</h3>
             <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
-            <BookshelfLabel />
+            <BookshelfLabel key={key} />
           </div>
         );
       })}
@@ -114,7 +115,7 @@ function Bookshelf() {
             <img src={image} alt={name} />
             <h3>{name}</h3>
             <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
-            <BookshelfLabel />
+            <BookshelfLabel key={key} />
           </div>
         );
       })}
