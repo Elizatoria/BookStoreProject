@@ -82,9 +82,8 @@ function Bookshelf() {
         const image = `${book.imageLinks.thumbnail}`;
         return (
           <div key={key}>
-            <img src={image} alt={name}/>
+            <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
             <h3>{name}</h3>
-            <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
             <BookshelfLabel key={key} />
           </div>
         );
@@ -97,9 +96,8 @@ function Bookshelf() {
         const image = `${book.imageLinks.thumbnail}`;
         return (
           <div key={key}>
-            <img src={image} alt={name} />
+            <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
             <h3>{name}</h3>
-            <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
             <BookshelfLabel key={key} />
           </div>
         );
@@ -112,9 +110,8 @@ function Bookshelf() {
         const image = `${book.imageLinks.thumbnail}`;
         return (
           <div key={key}>
-            <img src={image} alt={name} />
+            <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
             <h3>{name}</h3>
-            <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
             <BookshelfLabel key={key} />
           </div>
         );

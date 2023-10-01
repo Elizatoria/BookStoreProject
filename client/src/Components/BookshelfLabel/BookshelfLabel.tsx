@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
 
 interface Shelf {
   book: {
@@ -13,16 +14,28 @@ const BookshelfLabel = () => {
 
   const [bookLabel, setBookLabel] = useState('');
   const id = useParams();
+  const {getToken} = useContext(AccessTokenContext);
 
   console.log(bookLabel);
   console.log(id);
 
   const handleOnChange = (label: string) => {
-    axios.put<Shelf>(`/api/bookshelf/${id}/${label}`)
+    console.log(label);
+    console.log(id);
+    try {
+      axios.request<Shelf>({
+       method: "PUT",
+       url: `/api/bookshelf/${id}/${label}`,
+       headers: {
+         Authorization: `Bearer ${getToken()}`,
+       },
+      })
         .then((response) => {
           setBookLabel(response.data.book.shelf);
         })
-}
+    }
+    catch (error) {
+      console.error(error);} }
 
   return (
     <div>

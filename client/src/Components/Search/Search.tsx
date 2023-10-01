@@ -61,10 +61,10 @@ const Search = () => {
           filteredResults?.map((book) => {
             return (
               <div className="body__item">
-                <img src={book?.imageLinks.thumbnail} alt='Book' />
-                <h3>Name: {book?.title}</h3>
+                <img src={book?.imageLinks.thumbnail} alt='Book Details Button' 
+                onClick={() => {navigate(`/book/${book.id}`)}} />
+                <h3>Name: {book?.title} </h3>
                 <p>Authors: {book?.authors}</p>
-                <button onClick={() => {navigate(`/book/${book.id}`)}}>Book Details</button>
               </div>
             );
           })}
