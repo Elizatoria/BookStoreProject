@@ -29,11 +29,11 @@ const BookDetails = () => {
 
   return (
     <div>
-      <div>
+      <div className='titleImage'>
         <h2>{book?.title}</h2>
         <img src={image} alt='Book' />
       </div>
-      <div>
+      <div className='details'>
         <h2>Description</h2>
         <p>{book?.description}</p>
         <h2>Authors</h2>

@@ -5,6 +5,7 @@ import NavBar from "../NavBar/NavBar";
 
 import Login from "../Login/Login";
 import Bookshelf from "../Home/Bookshelf";
+import BookshelfLabel from "../BookshelfLabel/BookshelfLabel";
 
 import Search from "../Search/Search";
 import BookDetails from "../BookDetails/BookDetails";
@@ -27,6 +28,15 @@ function Router() {
         element={
           <ProtectedRoute>
             <Bookshelf />
+          </ProtectedRoute>
+        }
+      />
+
+<Route
+        path="/bookshelf/:id/:shelf"
+        element={
+          <ProtectedRoute>
+            <BookshelfLabel />
           </ProtectedRoute>
         }
       />
