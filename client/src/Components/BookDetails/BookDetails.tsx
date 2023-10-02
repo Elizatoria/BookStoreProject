@@ -1,7 +1,7 @@
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
+import BookshelfLabel from '../BookshelfLabel/BookshelfLabel';
 
 interface BookType {
   title: string,
@@ -15,19 +15,10 @@ interface BookType {
   categories: string
 }
 
-interface Shelf {
-  book: {
-    id: string,
-    shelf: string
-  }
-}
-
 const BookDetails = () => {
   const [book, setBook] = useState<BookType>();
 
   const {id} = useParams();
-
-  const {getToken} = useContext(AccessTokenContext);
 
   useEffect(() => {
     axios.get(`/api/book/${id}`)
@@ -38,29 +29,6 @@ const BookDetails = () => {
   }, [id])
 
   const image = `${book?.imageLinks.thumbnail}`;
-
-  const [bookLabel, setBookLabel] = useState('');
-
-  console.log(bookLabel);
-  console.log(id);
-
-  const handleOnChange = (label: string) => {
-    console.log(label);
-    console.log(id);
-    try {
-      axios.request<Shelf>({
-       method: "PUT",
-       url: `/api/bookshelf/${id}/${label}`,
-       headers: {
-         Authorization: `Bearer ${getToken()}`,
-       },
-      })
-        .then((response) => {
-          setBookLabel(response.data.book.shelf);
-        })
-    }
-    catch (error) {
-      console.error(error);} }
 
   return (
     <div>
@@ -80,20 +48,7 @@ const BookDetails = () => {
         <h2>Categories</h2>
         <p>{book?.categories}</p>
       </div>
-      <div className='labels'>
-    <label htmlFor="rank">Change Bookshelf:</label>
-    <select
-      value={bookLabel}
-      onChange={event => handleOnChange(event.target.value)}
-    >
-      <option value=""></option>
-      <option value="wantToRead">Want To Read</option>
-      <option value="currentlyReading">Currently Reading</option>
-      <option value="read">Read</option>
-      <option value="none">None</option>
-    </select>
-    <small>{bookLabel}</small>
-  </div>
+      <BookshelfLabel />
     </div>
   )
 }

@@ -17,7 +17,7 @@ const BookshelfLabel = () => {
   const {getToken} = useContext(AccessTokenContext);
 
   console.log(bookLabel);
-  console.log(id);
+  console.log(id.id);
 
   const handleOnChange = (label: string) => {
     console.log(label);
@@ -25,12 +25,13 @@ const BookshelfLabel = () => {
     try {
       axios.request<Shelf>({
        method: "PUT",
-       url: `/api/bookshelf/${id}/${label}`,
+       url: `/api/bookshelf/${id.id}/${label}`,
        headers: {
          Authorization: `Bearer ${getToken()}`,
        },
       })
         .then((response) => {
+          console.log(response.data.book);
           setBookLabel(response.data.book.shelf);
         })
     }
