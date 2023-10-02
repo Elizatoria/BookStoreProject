@@ -4,7 +4,7 @@ import axios from 'axios';
 import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
 
 interface Shelf {
-  book: {
+  books: {
     id: string,
     shelf: string
   }
@@ -17,11 +17,11 @@ const BookshelfLabel = () => {
   const {getToken} = useContext(AccessTokenContext);
 
   console.log(bookLabel);
-  console.log(id.id);
+  console.log(id);
 
   const handleOnChange = (label: string) => {
     console.log(label);
-    console.log(id);
+    console.log(id.id);
     try {
       axios.request<Shelf>({
        method: "PUT",
@@ -31,8 +31,8 @@ const BookshelfLabel = () => {
        },
       })
         .then((response) => {
-          console.log(response.data.book);
-          setBookLabel(response.data.book.shelf);
+          console.log(response.data.books.shelf);
+          setBookLabel(response.data.books.shelf);
         })
     }
     catch (error) {
@@ -45,7 +45,7 @@ const BookshelfLabel = () => {
       value={bookLabel}
       onChange={event => handleOnChange(event.target.value)}
     >
-      <option value=""></option>
+      <option value="">Choose Shelf</option>
       <option value="wantToRead">Want To Read</option>
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
