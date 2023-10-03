@@ -1,8 +1,9 @@
 import { useState, useContext, useEffect, useCallback } from "react";
 import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
 import axios from "axios";
-import BookshelfLabel from "../BookshelfLabel/BookshelfLabel";
+//import BookshelfLabel from "../BookshelfLabel/BookshelfLabel";
 import { useNavigate } from "react-router-dom";
+import BookshelfMove from "../../BookshelfMove/BookshelfMove";
 
 interface IBook {
   id: string;
@@ -84,7 +85,12 @@ function Bookshelf() {
           <div key={key}>
             <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
             <h3>{name}</h3>
-            <BookshelfLabel key={`${book.id}`} />
+            <BookshelfMove key={book.id} />
+            <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
+             { headers: { Authorization: `Bearer ${getToken()}` } })
+             .then(() => {
+              alert("Post deleted!");
+            })}>:x:</button>
           </div>
         );
       })}
@@ -98,7 +104,12 @@ function Bookshelf() {
           <div key={key}>
             <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
             <h3>{name}</h3>
-            <BookshelfLabel key={`${book.id}`} />
+            <BookshelfMove key={book.id} />
+            <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
+             { headers: { Authorization: `Bearer ${getToken()}` } })
+             .then(() => {
+              alert("Post deleted!");
+            })}>:x:</button>
           </div>
         );
       })}
@@ -112,7 +123,12 @@ function Bookshelf() {
           <div key={key}>
             <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
             <h3>{name}</h3>
-            <BookshelfLabel key={`${book.id}`} />
+            <BookshelfMove key={book.id} />
+            <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
+             { headers: { Authorization: `Bearer ${getToken()}` } })
+             .then(() => {
+              alert("Post deleted!");
+            })}>:x:</button>
           </div>
         );
       })}
