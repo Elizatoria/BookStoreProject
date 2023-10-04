@@ -16,9 +16,6 @@ const BookshelfLabel = () => {
   const id = useParams();
   const {getToken} = useContext(AccessTokenContext);
 
-  console.log(bookLabel);
-  console.log(id);
-
   const handleOnChange = (label: string) => {
     console.log(label);
     console.log(id.id);
@@ -33,6 +30,7 @@ const BookshelfLabel = () => {
         .then((response) => {
           console.log(response.data.books.shelf);
           setBookLabel(response.data.books.shelf);
+          console.log(bookLabel);
         })
     }
     catch (error) {

@@ -107,11 +107,10 @@ function Bookshelf() {
                   console.log(error)
       })}
     >
-      <option value=""></option>
+      <option value="">Pick A Shelf</option>
       <option value="wantToRead">Want To Read</option>
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
-      <option value="none">None</option>
     </select>
     <small>{bookLabel}</small>
   </div>
@@ -155,11 +154,10 @@ function Bookshelf() {
                   console.log(error)
       })}
     >
-      <option value=""></option>
+      <option value="">Pick A Shelf</option>
       <option value="wantToRead">Want To Read</option>
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
-      <option value="none">None</option>
     </select>
     <small>{bookLabel}</small>
   </div>
@@ -203,11 +201,10 @@ function Bookshelf() {
                   console.log(error)
       })}
     >
-      <option value=""></option>
+      <option value="">Pick A Shelf</option>
       <option value="wantToRead">Want To Read</option>
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
-      <option value="none">None</option>
     </select>
     <small>{bookLabel}</small>
   </div>
