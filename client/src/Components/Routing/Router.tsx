@@ -36,6 +36,15 @@ function Router() {
         path="/bookshelf/:id/:shelf"
         element={
           <ProtectedRoute>
+            <Bookshelf />
+          </ProtectedRoute>
+        }
+      />
+
+<Route
+        path="/bookshelf/:id/:shelf"
+        element={
+          <ProtectedRoute>
             <BookshelfLabel />
           </ProtectedRoute>
         }

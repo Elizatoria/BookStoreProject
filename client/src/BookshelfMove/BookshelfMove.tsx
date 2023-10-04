@@ -18,7 +18,7 @@ const BookshelfMove = () => {
 
   const handleOnChange = (label: string) => {
     console.log(label);
-    console.log(key);
+    console.log(key.id);
     try {
       axios.request<Shelf>({
        method: "PUT",
