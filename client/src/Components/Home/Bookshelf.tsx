@@ -3,7 +3,6 @@ import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
 import axios from "axios";
 //import BookshelfLabel from "../BookshelfLabel/BookshelfLabel";
 import { useNavigate } from "react-router-dom";
-//import BookshelfMove from "../../BookshelfMove/BookshelfMove";
 
 interface IBook {
   id: string;
@@ -65,6 +64,25 @@ function Bookshelf() {
 
   const [bookLabel, setBookLabel] = useState('');
 
+  const handleOnChange = (id: string, label: string) => {
+    console.log(label);
+    console.log(id);
+    try {
+      axios.request<IBook>({
+       method: "PUT",
+       url: `/api/bookshelf/${id}/${label}`,
+       headers: {
+         Authorization: `Bearer ${getToken()}`,
+       },
+      })
+        .then((response) => {
+          console.log(response.data.books.shelf);
+          setBookLabel(response.data.books.shelf);
+        })
+    }
+    catch (error) {
+      console.error(error);} }
+
   return (
     <div className="container mt-2 mb-5">
       <div className="d-flex justify-content-between">
@@ -92,20 +110,7 @@ function Bookshelf() {
     <label htmlFor="rank">Change Bookshelf:</label>
     <select
       value={bookLabel}
-      onChange={event => axios.request({
-        method: "PUT",
-        url: `/api/bookshelf/${book.id}/${event.target.value}`,
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-       })
-         .then((response) => {
-          console.log(response.data.books.shelf);
-           setBookLabel(response.data.books.shelf);
-         })
-      .catch((error) => {
-                  console.log(error)
-      })}
+      onChange={event => handleOnChange(`${book.id}`, event.target.value)}
     >
       <option value="">Pick A Shelf</option>
       <option value="wantToRead">Want To Read</option>
@@ -118,7 +123,7 @@ function Bookshelf() {
             <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
              { headers: { Authorization: `Bearer ${getToken()}` } })
              .then(() => {
-              alert("Post deleted!");
+              alert("Book Deleted with Delay!");
               setBookLabel("");
             })}>:x:</button>
           </div>
@@ -139,20 +144,7 @@ function Bookshelf() {
     <label htmlFor="rank">Change Bookshelf:</label>
     <select
       value={bookLabel}
-      onChange={event => axios.request({
-        method: "PUT",
-        url: `/api/bookshelf/${book.id}/${event.target.value}`,
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-       })
-         .then((response) => {
-          console.log(response.data.books.shelf);
-           setBookLabel(response.data.books.shelf);
-         })
-      .catch((error) => {
-                  console.log(error)
-      })}
+      onChange={event => handleOnChange(`${book.id}`, event.target.value)}
     >
       <option value="">Pick A Shelf</option>
       <option value="wantToRead">Want To Read</option>
@@ -165,7 +157,7 @@ function Bookshelf() {
             <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
              { headers: { Authorization: `Bearer ${getToken()}` } })
              .then(() => {
-              alert("Post deleted!");
+              alert("Book Deleted with Delay!");
               setBookLabel("");
             })}>:x:</button>
           </div>
@@ -186,20 +178,7 @@ function Bookshelf() {
     <label htmlFor="rank">Change Bookshelf:</label>
     <select
       value={bookLabel}
-      onChange={event => axios.request({
-        method: "PUT",
-        url: `/api/bookshelf/${book.id}/${event.target.value}`,
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-       })
-         .then((response) => {
-          console.log(response.data.books.shelf);
-           setBookLabel(response.data.books.shelf);
-         })
-      .catch((error) => {
-                  console.log(error)
-      })}
+      onChange={event => handleOnChange(`${book.id}`, event.target.value)}
     >
       <option value="">Pick A Shelf</option>
       <option value="wantToRead">Want To Read</option>
@@ -212,7 +191,7 @@ function Bookshelf() {
             <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
              { headers: { Authorization: `Bearer ${getToken()}` } })
              .then(() => {
-              alert("Post deleted!");
+              alert("Book Deleted with Delay!");
               setBookLabel("");
             })}>:x:</button>
           </div>
