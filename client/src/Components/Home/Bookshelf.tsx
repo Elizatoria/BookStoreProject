@@ -83,6 +83,39 @@ function Bookshelf() {
     catch (error) {
       console.error(error);} }
 
+      type DeleteBookResponse = '';
+
+      async function deleteFromList(indexToDelete: string) {
+        try {
+          // 👇️ const data: UpdateUserResponse
+          const { data, status } = await axios.delete<DeleteBookResponse>(
+            `/api/bookshelf/${indexToDelete}`,
+            {
+              headers: {
+                Authorization: `Bearer ${getToken()}`,
+              },
+            },
+          );
+          console.log('response is: ', data);
+          // 👇️ response status is: 200 (Means it is working)
+          console.log('response status is: ', status);
+          console.log(indexToDelete);
+
+          setBookLabel('');
+          alert('Book Deleted with Delay');
+          return data;
+
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            console.log('error message: ', error.message);
+            return error.message;
+          } else {
+            console.log('unexpected error: ', error);
+            return 'An unexpected error occurred';
+          }
+        }
+      }
+
   return (
     <div className="container mt-2 mb-5">
       <div className="d-flex justify-content-between">
@@ -120,12 +153,7 @@ function Bookshelf() {
     <small>{bookLabel}</small>
   </div>
 
-            <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
-             { headers: { Authorization: `Bearer ${getToken()}` } })
-             .then(() => {
-              alert("Book Deleted with Delay!");
-              setBookLabel("");
-            })}>:x:</button>
+  <button onClick={() => deleteFromList(`${book.id}`)}>❌</button>
           </div>
         );
       })}
@@ -154,12 +182,7 @@ function Bookshelf() {
     <small>{bookLabel}</small>
   </div>
 
-            <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
-             { headers: { Authorization: `Bearer ${getToken()}` } })
-             .then(() => {
-              alert("Book Deleted with Delay!");
-              setBookLabel("");
-            })}>:x:</button>
+  <button onClick={() => deleteFromList(`${book.id}`)}>❌</button>
           </div>
         );
       })}
@@ -188,12 +211,7 @@ function Bookshelf() {
     <small>{bookLabel}</small>
   </div>
 
-            <button onClick={() => axios.delete(`/api/bookshelf/${book.id}`,
-             { headers: { Authorization: `Bearer ${getToken()}` } })
-             .then(() => {
-              alert("Book Deleted with Delay!");
-              setBookLabel("");
-            })}>:x:</button>
+  <button onClick={() => deleteFromList(`${book.id}`)}>❌</button>
           </div>
         );
       })}
