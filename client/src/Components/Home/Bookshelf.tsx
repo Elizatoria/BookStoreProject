@@ -83,6 +83,10 @@ function Bookshelf() {
     catch (error) {
       console.error(error);} }
 
+      useEffect(() => {
+    getBooks();
+  }, [getBooks,wantRead,currently,read]);
+
       type DeleteBookResponse = '';
 
       async function deleteFromList(indexToDelete: string) {
@@ -100,9 +104,6 @@ function Bookshelf() {
           // 👇️ response status is: 200 (Means it is working)
           console.log('response status is: ', status);
           console.log(indexToDelete);
-
-          setBookLabel('');
-          alert('Book Deleted with Delay');
           return data;
 
         } catch (error) {
@@ -115,6 +116,10 @@ function Bookshelf() {
           }
         }
       }
+
+      useEffect(() => {
+    getBooks();
+  }, [getBooks,wantRead,currently,read]);
 
   return (
     <div className="container mt-2 mb-5">
@@ -135,11 +140,11 @@ function Bookshelf() {
         const name = `${book.title}`;
         const image = `${book.imageLinks.thumbnail}`;
         return (
-          <div key={key}>
+          <div key={key} className="shelf">
             <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
-            <h3>{name}</h3>
             
             <div className='labels'>
+            <h3>{name}</h3>
     <label htmlFor="rank">Change Bookshelf:</label>
     <select
       value={bookLabel}
@@ -150,10 +155,8 @@ function Bookshelf() {
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
     </select>
-    <small>{bookLabel}</small>
+    <div><button onClick={() => deleteFromList(`${book.id}`)}>❌ - Delete Book</button></div>
   </div>
-
-  <button onClick={() => deleteFromList(`${book.id}`)}>❌</button>
           </div>
         );
       })}
@@ -164,11 +167,11 @@ function Bookshelf() {
         const name = `${book.title}`;
         const image = `${book.imageLinks.thumbnail}`;
         return (
-          <div key={key}>
+          <div key={key} className="shelf">
             <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
-            <h3>{name}</h3>
             
             <div className='labels'>
+            <h3>{name}</h3>
     <label htmlFor="rank">Change Bookshelf:</label>
     <select
       value={bookLabel}
@@ -179,10 +182,8 @@ function Bookshelf() {
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
     </select>
-    <small>{bookLabel}</small>
+    <div><button onClick={() => deleteFromList(`${book.id}`)}>❌ - Delete Book</button></div>
   </div>
-
-  <button onClick={() => deleteFromList(`${book.id}`)}>❌</button>
           </div>
         );
       })}
@@ -193,11 +194,11 @@ function Bookshelf() {
         const name = `${book.title}`;
         const image = `${book.imageLinks.thumbnail}`;
         return (
-          <div key={key}>
+          <div key={key} className="shelf">
             <img src={image} alt='Book Details Button' onClick={() => {navigate(`/book/${book.id}`)}} />
-            <h3>{name}</h3>
             
             <div className='labels'>
+            <h3>{name}</h3>
     <label htmlFor="rank">Change Bookshelf:</label>
     <select
       value={bookLabel}
@@ -208,10 +209,8 @@ function Bookshelf() {
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
     </select>
-    <small>{bookLabel}</small>
+    <div><button onClick={() => deleteFromList(`${book.id}`)}>❌ - Delete Book</button></div>
   </div>
-
-  <button onClick={() => deleteFromList(`${book.id}`)}>❌</button>
           </div>
         );
       })}

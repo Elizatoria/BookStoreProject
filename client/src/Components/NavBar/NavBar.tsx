@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
-    <nav>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
       <div className="top">
       <NavLink to="/bookshelf">
         My Bookshelf

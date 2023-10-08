@@ -61,10 +61,14 @@ const Search = () => {
           filteredResults?.map((book) => {
             return (
               <div className="body__item">
+                <div>
                 <img src={book?.imageLinks.thumbnail} alt='Book Details Button' 
                 onClick={() => {navigate(`/book/${book.id}`)}} />
+                </div>
+                <div>
                 <h3>Name: {book?.title} </h3>
                 <p>Authors: {book?.authors}</p>
+                </div>
               </div>
             );
           })}

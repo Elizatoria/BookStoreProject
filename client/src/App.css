@@ -7,3 +7,15 @@ nav {
 .top {
   margin: 10px;
 }
+
+.body__item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.shelf {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
