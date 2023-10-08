@@ -83,9 +83,9 @@ function Bookshelf() {
     catch (error) {
       console.error(error);} }
 
-      useEffect(() => {
-    getBooks();
-  }, [getBooks,wantRead,currently,read]);
+      // useEffect(() => {
+      //   getBooks();
+      // }, [getBooks,wantRead,currently,read]);
 
       type DeleteBookResponse = '';
 
@@ -117,9 +117,9 @@ function Bookshelf() {
         }
       }
 
-      useEffect(() => {
-    getBooks();
-  }, [getBooks,wantRead,currently,read]);
+      // useEffect(() => {
+      //   getBooks();
+      // }, [getBooks,wantRead,currently,read]);
 
   return (
     <div className="container mt-2 mb-5">

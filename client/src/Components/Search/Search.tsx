@@ -15,8 +15,6 @@ const Search = () => {
     const [filteredResults, setFilteredResults] = useState<BookType[] | undefined>([]);
     const [searchInput, setSearchInput] = useState('');
 
-    console.log(filteredResults);
-
     const navigate = useNavigate();
 
   const handleOnClick = () => {
@@ -24,7 +22,6 @@ const Search = () => {
       axios.get(`/api/book/search/${searchInput}`)
           .then((response) => {
               setFilteredResults(response.data.books);
-              console.log(response.data.books);
           })
           .catch((error) => {
             console.log(error)

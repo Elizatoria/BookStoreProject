@@ -17,8 +17,6 @@ const BookshelfLabel = () => {
   const {getToken} = useContext(AccessTokenContext);
 
   const handleOnChange = (label: string) => {
-    console.log(label);
-    console.log(id.id);
     try {
       axios.request<Shelf>({
        method: "PUT",
@@ -28,9 +26,7 @@ const BookshelfLabel = () => {
        },
       })
         .then((response) => {
-          console.log(response.data.books.shelf);
           setBookLabel(response.data.books.shelf);
-          console.log(bookLabel);
         })
     }
     catch (error) {
@@ -48,7 +44,6 @@ const BookshelfLabel = () => {
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
     </select>
-    <small>{bookLabel}</small>
   </div>
   )
 }

@@ -2,9 +2,10 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
 
 import Login from "../Login/Login";
-import Bookshelf from "../Home/Bookshelf";
+import Bookshelf from "../Bookshelf/Bookshelf";
 import BookshelfLabel from "../BookshelfLabel/BookshelfLabel";
 
 import Search from "../Search/Search";
@@ -76,6 +77,10 @@ function Router() {
         }
       />
     </Routes>
+
+    <ProtectedRoute>
+      <Footer />
+      </ProtectedRoute>
     </>
   );
 }
