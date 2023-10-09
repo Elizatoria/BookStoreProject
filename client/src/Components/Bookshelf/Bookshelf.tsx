@@ -65,8 +65,6 @@ function Bookshelf() {
   const [bookLabel, setBookLabel] = useState('');
 
   const handleOnChange = (id: string, label: string) => {
-    console.log(label);
-    console.log(id);
     try {
       axios.request<IBook>({
        method: "PUT",
@@ -76,7 +74,6 @@ function Bookshelf() {
        },
       })
         .then((response) => {
-          console.log(response.data.books.shelf);
           setBookLabel(response.data.books.shelf);
         })
     }
@@ -91,8 +88,7 @@ function Bookshelf() {
 
       async function deleteFromList(indexToDelete: string) {
         try {
-          // 👇️ const data: UpdateUserResponse
-          const { data, status } = await axios.delete<DeleteBookResponse>(
+          const { data } = await axios.delete<DeleteBookResponse>(
             `/api/bookshelf/${indexToDelete}`,
             {
               headers: {
@@ -100,21 +96,11 @@ function Bookshelf() {
               },
             },
           );
-          console.log('response is: ', data);
-          // 👇️ response status is: 200 (Means it is working)
-          console.log('response status is: ', status);
-          console.log(indexToDelete);
           return data;
 
-        } catch (error) {
-          if (axios.isAxiosError(error)) {
-            console.log('error message: ', error.message);
-            return error.message;
-          } else {
-            console.log('unexpected error: ', error);
-            return 'An unexpected error occurred';
-          }
-        }
+        }     
+        catch (error) {
+        console.error(error);}
       }
 
       useEffect(() => {
