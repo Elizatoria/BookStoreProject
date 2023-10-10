@@ -82,7 +82,7 @@ function Bookshelf() {
 
       useEffect(() => {
         getBooks();
-      }, [getBooks,wantRead,currently,read]);
+      }, [getBooks, wantRead, currently, read]);
 
       type DeleteBookResponse = '';
 
@@ -105,20 +105,21 @@ function Bookshelf() {
 
       useEffect(() => {
         getBooks();
-      }, [getBooks,wantRead,currently,read]);
+      }, [getBooks, wantRead, currently, read]);
 
   return (
     <div className="container mt-2 mb-5">
       <div className="d-flex justify-content-between">
       <button
           type="button"
-          className="btn btn-primary mb-2"
+          className="btn btn-primary mb-2 button-84"
           onClick={() => logout()}
         >
           Logout
         </button>
-        <h1 className="h2">My Bookshelf</h1>
       </div>
+
+      <div><h1>My Bookshelf</h1></div>
 
       <h2>Want To Read</h2>
       {wantRead.map((book) => {
@@ -141,7 +142,7 @@ function Bookshelf() {
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
     </select>
-    <div><button onClick={() => deleteFromList(`${book.id}`)}>❌ - Delete Book</button></div>
+    <div><button className="button-1" onClick={() => deleteFromList(`${book.id}`)}><b>Delete Book</b></button></div>
   </div>
           </div>
         );
@@ -168,7 +169,7 @@ function Bookshelf() {
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
     </select>
-    <div><button onClick={() => deleteFromList(`${book.id}`)}>❌ - Delete Book</button></div>
+    <div><button className="button-1" onClick={() => deleteFromList(`${book.id}`)}><b>Delete Book</b></button></div>
   </div>
           </div>
         );
@@ -195,7 +196,7 @@ function Bookshelf() {
       <option value="currentlyReading">Currently Reading</option>
       <option value="read">Read</option>
     </select>
-    <div><button onClick={() => deleteFromList(`${book.id}`)}>❌ - Delete Book</button></div>
+    <div><button className="button-1" onClick={() => deleteFromList(`${book.id}`)}><b>Delete Book</b></button></div>
   </div>
           </div>
         );

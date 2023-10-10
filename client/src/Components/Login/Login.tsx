@@ -63,7 +63,7 @@ function Login() {
 
   return (
     <div className="container mt-2 mb-5">
-      <h1>Login</h1>
+      <h2 className="page-title">A room without books is like a body without a soul. – Marcus Tullius Cicero</h2>
       <form className="form-inline mb-2" method="POST" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username" className="mr-2">
@@ -95,9 +95,11 @@ function Login() {
             }
           />
         </div>
-        <button type="submit" className="btn btn-primary" disabled={isLoading}>
-          Login
+        <div className="form-group">
+        <button type="submit" className="btn btn-primary button-64" disabled={isLoading}>
+          <span className="text">Login</span>
         </button>
+        </div>
       </form>
       <p className="form-text">
         <small>
@@ -105,6 +107,12 @@ function Login() {
           <em>granger</em>
         </small>
       </p>
+      <p className="form-text">
+        <small>
+          The username is <em>harry</em> and the password is{" "}
+          <em>potter</em>
+        </small>
+          </p>
       {isLoading && <p>Loading ...</p>}
       {errorMessage && (
         <div className="alert alert-danger" role="alert">

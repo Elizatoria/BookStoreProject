@@ -29,10 +29,9 @@ const Search = () => {
   };
 
   return (
-    <div>
+    <div className='search-page'>
       <div className="title">
-        <h2>A room without books is like a body without a soul. – Marcus Tullius Cicero</h2>
-        <h3>Book Find</h3>
+        <h2>Book Find</h2>
       </div>
       <div className="input__wrapper">
         <input
@@ -43,7 +42,7 @@ const Search = () => {
             setSearchInput(e.target.value);
           }}
         />
-        <button disabled={!searchInput} onClick={handleOnClick}>
+        <button className='button-search' disabled={!searchInput} onClick={handleOnClick}>
           Search
         </button>
       </div>
@@ -56,8 +55,9 @@ const Search = () => {
         {filteredResults &&
           filteredResults?.length > 0 &&
           filteredResults?.map((book) => {
+            const key = `book-${book.id}`;
             return (
-              <div className="body__item">
+              <div className="body__item" key={key}>
                 <div>
                 <img src={book?.imageLinks.thumbnail} alt='Book Details Button' 
                 onClick={() => {navigate(`/book/${book.id}`)}} />
