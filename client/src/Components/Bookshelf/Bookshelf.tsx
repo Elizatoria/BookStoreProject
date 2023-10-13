@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect, useCallback } from "react";
 import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
 import axios from "axios";
-//import BookshelfLabel from "../BookshelfLabel/BookshelfLabel";
 import { useNavigate } from "react-router-dom";
+import "../Bookshelf/Bookshelf.css";
 
 interface IBook {
   id: string;
@@ -34,6 +34,7 @@ function Bookshelf() {
   //Getting access token from the Context API
   const { getToken, logout } = useContext(AccessTokenContext);
 
+  //axios call to the bookshelf
   const getBooks = useCallback(async () => {
     try {
       const response = await axios.request<IBookResponse>({
@@ -50,9 +51,8 @@ function Bookshelf() {
     } catch (error) {
       console.error(error);
       /**
-       * If the response returns an HTTP status of 401 in this case, that means that the token has expired or is invalid.
-       * Ideally, we would want to refresh the JWT token
-       * but we need to be careful to get into a never ending loop.
+       * HTTP status of 401 means that the token has expired or is invalid.
+       * Refresh the JWT token but be careful to not get into a never ending loop.
        */
       setErrorMessage("Oh no! An unexpected error occurred.");
     }
@@ -62,6 +62,7 @@ function Bookshelf() {
     getBooks();
   }, [getBooks]);
 
+  //axios call to change bookshelf category
   const [bookLabel, setBookLabel] = useState('');
 
   const handleOnChange = (id: string, label: string) => {
@@ -84,6 +85,7 @@ function Bookshelf() {
         getBooks();
       }, [getBooks, wantRead, currently, read]);
 
+      //axios call to delete a book from the bookshelf
       type DeleteBookResponse = '';
 
       async function deleteFromList(indexToDelete: string) {
@@ -107,6 +109,7 @@ function Bookshelf() {
         getBooks();
       }, [getBooks, wantRead, currently, read]);
 
+      //displays logout button and bookshelf
   return (
     <div className="container mt-2 mb-5">
       <div className="d-flex justify-content-between">

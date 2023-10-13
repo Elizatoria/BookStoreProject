@@ -20,6 +20,7 @@ const BookDetails = () => {
 
   const {id} = useParams();
 
+  //axios call to the book
   useEffect(() => {
     axios.get(`/api/book/${id}`)
     .then((res) => {
@@ -30,6 +31,7 @@ const BookDetails = () => {
 
   const image = `${book?.imageLinks.thumbnail}`;
 
+  //displays book details
   return (
     <div>
       <div className='titleImage'>

@@ -67,7 +67,8 @@ function Router() {
       }
       />
 
-      {/* If no matches, display a 404 File Not Found page if logged in. If not logged in, the <ProtectedRoute /> will redirect to the login form. */}
+      {/* If no matches, display a 404 File Not Found page if logged in. 
+      If not logged in, the <ProtectedRoute /> will redirect to the login form. */}
       <Route
         path="*"
         element={

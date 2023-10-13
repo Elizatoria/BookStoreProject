@@ -10,6 +10,7 @@ interface Shelf {
   }
 }
 
+//axios call to add book to bookshelf
 const BookshelfLabel = () => {
 
   const [bookLabel, setBookLabel] = useState('');
@@ -32,6 +33,7 @@ const BookshelfLabel = () => {
     catch (error) {
       console.error(error);} }
 
+      //displays the select menu in BookDetails
   return (
     <div>
     <label htmlFor="rank">Change Bookshelf:</label>

@@ -2,6 +2,7 @@ import { useContext, useState, FormEvent, ChangeEvent } from "react";
 import { AccessTokenContext } from "../../Contexts/AccessTokenContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../Login/Login.css";
 
 function Login() {
   /**
@@ -26,6 +27,7 @@ function Login() {
 
     setIsLoading(true);
 
+    //axios call to signin
     try {
       const response = await axios.request({
         method: "POST",
@@ -46,13 +48,13 @@ function Login() {
       if (!token) throw Error("Missing JWT token");
       login(token);
       /**
-       * And redirecting to the home page
+       * And redirecting to the Bookshelf
        */
       navigate("/bookshelf", { replace: true });
     } catch (error) {
       console.error(error);
       /**
-       * If the response returns an HTTP status of 401 when loggin in, this means that username or password is incorrect
+       * HTTP status of 401 means that username or password is incorrect
        */
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         setErrorMessage("Invalid username or password");
@@ -61,6 +63,7 @@ function Login() {
     }
   };
 
+  //displays signin page
   return (
     <div className="container mt-2 mb-5">
       <h2 className="page-title">A room without books is like a body without a soul. – Marcus Tullius Cicero</h2>

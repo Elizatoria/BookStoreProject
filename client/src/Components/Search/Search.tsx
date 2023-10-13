@@ -1,6 +1,7 @@
 import { useState} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../Search/Search.css";
 
 interface BookType {
   id: string,
@@ -19,6 +20,7 @@ const Search = () => {
 
   const handleOnClick = () => {
     
+    //axios call to get search results
       axios.get(`/api/book/search/${searchInput}`)
           .then((response) => {
               setFilteredResults(response.data.books);
@@ -28,6 +30,7 @@ const Search = () => {
           })
   };
 
+  //displays search results
   return (
     <div className='search-page'>
       <div className="title">
