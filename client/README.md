@@ -1,3 +1,15 @@
+This Project is to create a book store web application. The set up reminds me of https://www.goodreads.com/, which is a social cataloging website and is a subsidiary of Amazon. However, the API used in this project is a wrapper around the Google API. Users can signin, search for books, select books, and view detailed book information. They can also save books to three different lists or “shelves”:
+
+“Want to Read”
+“Currently Reading”
+“Read”
+
+Together, these shelves will make up their “bookshelf”, and users can manage the contents of their bookshelves.
+
+Here is the link to the live hosted project. https://victoriabookstoreproject.onrender.com/
+
+----------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
